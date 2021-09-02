@@ -63,6 +63,7 @@ export const constantRoutes = [
 		name: 'setting',
 		meta: {
 			title: '系统设置',
+			icon:'yonghu'
 		},
 		component: () => import('views/layout/index.vue'),
 		children: [

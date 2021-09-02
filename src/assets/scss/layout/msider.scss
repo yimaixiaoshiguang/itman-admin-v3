@@ -78,7 +78,7 @@
             }
         }
 
-        .el-tooltip {
+        div[aria-describedby] {
             padding: 0 9px !important;
         }
     }

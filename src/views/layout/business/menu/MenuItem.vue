@@ -4,13 +4,16 @@
 		<template v-if="routerWhiteList.indexOf(menu.path) > -1">
 			<el-menu-item :index="(menu.children[0].path)">
 				<icon-svg :icon="menu.children[0].meta.icon" size="24" style="vertical-align: middle;" v-if="menu.children[0].meta && menu.children[0].meta.icon"/>
-				<span >{{menu.children[0].meta && menu.children[0].meta.title}}</span>
+				<template #title>
+
+					<span slot='title'>{{menu.children[0].meta && menu.children[0].meta.title}}</span>
+				</template>
 			</el-menu-item>
 		</template>
 		<el-submenu :index="(menu.path)" v-else>
 			<template #title>
 				<icon-svg :icon="menu.meta.icon" size="24" style="vertical-align: middle;" v-if="menu.meta && menu.meta.icon"/>
-				<span  :class="{'no-icon':menu.meta && !menu.meta.icon}">{{menu.meta && menu.meta.title}}</span>
+				<span slot='title' :class="{'no-icon':menu.meta && !menu.meta.icon}">{{menu.meta && menu.meta.title}}</span>
 			</template>
 			<template v-for="childMenu in menu.children">
 				<menu-item :menu="childMenu" :key="childMenu.path" v-if="!childMenu.hidden"></menu-item>
@@ -25,7 +28,7 @@
     </el-menu-item> -->
     <el-menu-item :index="(menu.path)" v-else>
         <icon-svg :icon="menu.meta.icon" size="24" style="vertical-align: middle;" v-if="menu.meta && menu.meta.icon"/>
-        <span  :class="{'no-icon':menu.meta && !menu.meta.icon}">{{menu.meta && menu.meta.title}}</span>
+        <span slot='title' :class="{'no-icon':menu.meta && !menu.meta.icon}">{{menu.meta && menu.meta.title}}</span>
     </el-menu-item>
 </template>
 <script setup>
@@ -50,4 +53,8 @@ export default {
     .no-icon {
         margin-left: 12px;
     }
+
+	.el-menu--collapse span[slot='title'] {
+		display: none;
+	}
 </style>
