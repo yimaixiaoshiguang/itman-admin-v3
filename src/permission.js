@@ -1,5 +1,5 @@
-import router from './router'
-import store from './store';
+import { router } from './router'
+import { store } from './store';
 import { getToken, removeAllSessionItem } from '@/api/auth';
 
 
@@ -18,7 +18,7 @@ router.beforeEach(async (to, from, next) => {
 		if(from.name == null && !refresh){
 			refresh = true;
 
-			store.dispatch('user/getUserMenuTree')
+			// store.dispatch('user/getUserMenuTree')
 
 			//获取按钮权限
 			store.dispatch('user/getBtnPermission')

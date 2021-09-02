@@ -11,7 +11,7 @@
 
 <script setup>
 	import { useStore } from 'vuex';
-	import { computed }  from 'vue'
+	import { computed, defineComponent }  from 'vue'
 	import Breadcrumb from './Breadcrumb.vue';
 	import Hamburger from './Hamburger.vue';
 	import logout from '../business/Logout.vue';
@@ -22,7 +22,9 @@
 	const hamburgerPosition = computed(() => store.state.settings.hamburgerPosition)
 </script>
 <script>
-
+	export default defineComponent({
+		name:'Navbar'
+	})
 
 // export default {
 // 	components: {

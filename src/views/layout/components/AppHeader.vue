@@ -5,9 +5,9 @@
 </template>
 <script>
 import { useStore } from 'vuex'
-import { computed }  from 'vue'
+import { computed, defineComponent }  from 'vue'
 
-export default {
+export default defineComponent({
     name: 'AppHeader',
 	setup(props){
 		const store = useStore()
@@ -16,9 +16,6 @@ export default {
 		const headerFixed = computed(() => store.state.settings.headerFixed)
 		const headerStick = computed(() => store.state.settings.headerStick)
 		const siderCollapse = computed(() => !store.state.app.sidebar.opened)
-
-		console.log(siderCollapse.value);
-		console.log(store);
 
 		const headerClass = computed(() => {
 			return {
@@ -34,7 +31,7 @@ export default {
 			headerClass
 		}
 	}
-};
+});
 </script>
 
 <style lang="scss" scoped>

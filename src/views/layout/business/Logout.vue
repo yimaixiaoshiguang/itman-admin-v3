@@ -9,16 +9,21 @@
 	        <icon-svg icon="tuichu" size="20" style="margin:-3px 6px;" title="退出系统" @click="logout"></icon-svg>
 	    </span>
 	</div> -->
-    <el-dropdown class="header-user" trigger="click" @command="handleCommand" style="cursor:pointer">
-        <span class="el-dropdown-link">
-            <span>{{name}}</span><i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="dashboard">主页</el-dropdown-item>
-            <el-dropdown-item command="personal">个人中心</el-dropdown-item>
-            <el-dropdown-item divided command="logout">退出系统</el-dropdown-item>
-        </el-dropdown-menu>
-        </el-dropdown>
+	<div class="header-user">
+		<el-dropdown trigger="click" @command="handleCommand">
+			<span class="el-dropdown-link">
+				<span>{{name}}</span><i class="el-icon-arrow-down el-icon--right"></i>
+			</span>
+			<template #dropdown>
+				<el-dropdown-menu>
+					<el-dropdown-item command="dashboard">主页</el-dropdown-item>
+					<el-dropdown-item command="personal">个人中心</el-dropdown-item>
+					<el-dropdown-item divided command="logout">退出系统</el-dropdown-item>
+				</el-dropdown-menu>
+			</template>
+			</el-dropdown>
+	</div>
+
 </template>
 
 <script>
@@ -55,7 +60,7 @@
         },
         mounted(){
         }
-        
+
     }
 </script>
 
@@ -68,6 +73,7 @@
         display: flex;
         align-items: center;
         font-size: 16px;
+		cursor:pointer;
     }
 
     .header-user-item {

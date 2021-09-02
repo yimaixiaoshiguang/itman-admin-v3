@@ -1,5 +1,5 @@
 <template>
-	<mtag>
+	<app-tags>
 		<el-tabs v-model="currentTag" type="card"  @tab-click="tagChange" @tab-remove="removeTab">
 			<el-tab-pane
 				v-for="item in visitedViews"
@@ -11,146 +11,166 @@
 			</el-tab-pane>
 		</el-tabs>
 		<div class="mvk-tags-view-close">
-			<el-dropdown @command="tagClose">
+			<el-dropdown @command="tagClose" placement="bottom">
 				<el-button type="primary" size="mini">
 					<i class="el-icon-arrow-down el-icon--right"></i>
 				</el-button>
-				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item command="others">关闭其他</el-dropdown-item>
-					<el-dropdown-item command="all">关闭所有</el-dropdown-item>
-				</el-dropdown-menu>
+				<template #dropdown>
+					<el-dropdown-menu>
+						<el-dropdown-item command="others">关闭其他</el-dropdown-item>
+						<el-dropdown-item command="all">关闭所有</el-dropdown-item>
+					</el-dropdown-menu>
+				</template>
 			</el-dropdown>
 		</div>
-	</mtag>
+	</app-tags>
 
 </template>
 
 <script>
-	import path from 'path'
+import { computed, onMounted, reactive, defineComponent, watch, toRefs, toRaw } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { AppTags } from '../components';
 
-	export default {
-		name:'TagsView',
-		components: {
-			'mtag':()=>import('../components/AppTags.vue')
-		},
-		data() {
-			return {
-				affixTags: [],
-				currentTag:this.$route.path,
-			}
-		},
-		computed: {
+export default defineComponent({
+	name:'TagsView',
+	components: {
+		AppTags
+	},
+	setup() {
+		const store = useStore()
+		const router = useRouter()
+		const route = useRoute()
 
-			visitedViews() {
-				return this.$store.state.tagsView.visitedViews
-			},
-			routes() {
-				return this.$router.options.routes
-			},
+		const state = reactive({
+			affixTags: [],
+			currentTag:route.path,
+		})
 
-		},
-		watch: {
-			$route() {
-				this.addTags()
-				this.currentTag = this.$route.path
-			},
-		},
-		mounted() {
-			this.initTags()
-			this.addTags()
-		},
-		methods: {
+		const visitedViews = computed(() => store.state.tagsView.visitedViews)
+		const routes = computed(() => router.options.routes)
 
-			tagChange(tab){
-				this.$router.push(tab.name)
-			},
-			//更多操作
-			tagClose(type){
-				const view = this.visitedViews.filter(item => item.path === this.currentTag)[0]
-				if(type == 'others'){
-					this.closeOthersTags(view)
-				}else if(type == 'all'){
-					this.closeAllTags(view)
-				}
-			},
-			//删除当前tag
-			removeTab(targetName){
-				const view = this.visitedViews.filter(item => item.path === targetName)[0]
-				this.closeSelectedTag(view)
-			},
-			filterAffixTags(routes, basePath = '/') {
-				let tags = []
-				routes.forEach(route => {
-					if(route.meta && route.meta.affix) {
-						const tagPath = path.resolve(basePath, route.path)
-						tags.push({
-							fullPath: tagPath,
-							path: tagPath,
-							name: route.name,
-							meta: { ...route.meta
-							}
-						})
-					}
-					if(route.children) {
-						const tempTags = this.filterAffixTags(route.children, route.path)
-						if(tempTags.length >= 1) {
-							tags = [...tags, ...tempTags]
-						}
-					}
-				})
-				return tags
-			},
-			initTags() {
-				const affixTags = this.affixTags = this.filterAffixTags(this.routes)
-				for(const tag of affixTags) {
-					// Must have tag name
-					if(tag.name) {
-						this.$store.dispatch('tagsView/addVisitedView', tag)
-					}
-				}
-			},
-			addTags() {
-				const {
-					name
-				} = this.$route
-				if(name) {
-					this.$store.dispatch('tagsView/addView', this.$route)
-				}
-				return false
-			},
-			closeSelectedTag(view) {
-				this.$store.dispatch('tagsView/delView', view).then(({
-					visitedViews
-				}) => {
-					if(this.currentTag == this.$route.path) {
-						this.toLastView(visitedViews, view)
-					}
-				})
-			},
-			closeOthersTags(view) {
-				this.$store.dispatch('tagsView/delOthersViews', view)
-			},
-			closeAllTags(view) {
-				this.$store.dispatch('tagsView/delAllViews').then(({
-					visitedViews
-				}) => {
-					if(this.affixTags.some(tag => tag.path === view.path)) {
-						return
-					}
-					this.toLastView(visitedViews)
-				})
-			},
-			toLastView(visitedViews) {
-				const latestView = visitedViews.slice(-1)[0]
-				if(latestView) {
-					this.$router.push(latestView)
-				} else {
-					this.$router.push('/dashboard/index');//首页
-				}
-			},
+		onMounted(()=>{
+			initTags()
+			addTags()
+		})
+
+		watch(route,()=>{
+			addTags()
+			state.currentTag = route.path
+		})
+
+		const tagChange = (tab) => {
+			router.push(tab.name)
 		}
-	}
+
+		//更多操作
+		const tagClose = (type) => {
+			const view = visitedViews.value.filter(item => item.path === state.currentTag)[0]
+			if(type == 'others'){
+				closeOthersTags(view)
+			}else if(type == 'all'){
+				closeAllTags(view)
+			}
+		}
+
+		//删除当前tag
+		const removeTab = (targetName) => {
+			const view = visitedViews.value.filter(item => item.path === targetName)[0]
+			closeSelectedTag(toRaw(view))
+		}
+
+		const filterAffixTags = (routes, basePath = '/') => {
+			let tags = []
+			routes.forEach(route => {
+				if(route.meta && route.meta.affix) {
+					// const tagPath = path.resolve(basePath, route.path)
+					const tagPath = route.path
+					tags.push({
+						fullPath: tagPath,
+						path: tagPath,
+						name: route.name,
+						meta: { ...route.meta
+						}
+					})
+				}
+				if(route.children) {
+					const tempTags = filterAffixTags(route.children, route.path)
+					if(tempTags.length >= 1) {
+						tags = [...tags, ...tempTags]
+					}
+				}
+			})
+			return tags
+		}
+
+		const initTags = () => {
+			const affixTags = state.affixTags = filterAffixTags(routes.value)
+			for(const tag of affixTags) {
+				// Must have tag name
+				if(tag.name) {
+					store.dispatch('tagsView/addVisitedView', tag)
+				}
+			}
+		}
+
+		const addTags = () => {
+			const {
+				name
+			} = route
+			if(name) {
+				store.dispatch('tagsView/addView', route)
+			}
+			return false
+		}
+
+		const closeSelectedTag = (view) => {
+			store.dispatch('tagsView/delView', view).then(({
+				visitedViews
+			}) => {
+				if(state.currentTag == route.path) {
+					toLastView(visitedViews, view)
+				}
+			})
+		}
+
+		const closeOthersTags = (view) => {
+			store.dispatch('tagsView/delOthersViews', view)
+		}
+
+		const closeAllTags = (view) => {
+			store.dispatch('tagsView/delAllViews').then(({
+				visitedViews
+			}) => {
+				if(state.affixTags.some(tag => tag.path === view.path)) {
+					return
+				}
+				toLastView(visitedViews)
+			})
+		}
+
+		const toLastView = (visitedViews) => {
+			const latestView = visitedViews.slice(-1)[0]
+			if(latestView) {
+				router.push(latestView)
+			} else {
+				router.push('/dashboard/index');//首页
+			}
+		}
+		return {
+			...toRefs(state),
+			visitedViews,
+			tagChange,
+			tagClose,
+			removeTab,
+		};
+	},
+});
 </script>
+
+
+
 
 <style lang="scss">
 	//修改element ui的样式

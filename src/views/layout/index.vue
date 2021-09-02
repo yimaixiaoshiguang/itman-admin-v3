@@ -14,8 +14,7 @@
 				<navbar />
 			</app-header>
 			<div class="mvk-layout-content">
-				<tags-view v-if="tagsView"/>
-
+				<tag-view v-if="tagsView"></tag-view>
 				<div class="mvk-layout-content-main">
 					<app-main />
 				</div>
@@ -28,53 +27,21 @@
 
 </template>
 <script setup>
-	import {AppHeader, AppSider, AppInside, Logo, AppMain, Navbar, Hamburger } from './components';
-	import {Menu, TagsView} from './business'
-	import { computed } from 'vue'
+	import {AppHeader, AppSider, AppInside, Logo, AppMain, Navbar, Hamburger, AppTags } from './components';
+	import {Menu, TagView} from './business'
+	import { computed, defineComponent } from 'vue'
 	import { useStore } from 'vuex'
 
 	const store = useStore()
 	const headerStick = computed(() => store.state.settings.headerStick)
 	const tagsView = computed(() => store.state.settings.tagsView)
-	console.log(store.state.settings);
 	const hamburgerPosition = computed(() => store.state.settings.hamburgerPosition)
-
 
 </script>
 <script>
-	// import {MMenu} from './menu.vue'
-	// import {AppHeader, AppSider, AppInside, Logo, AppMain, Navbar, Hamburger } from './components';
-	// import {Menu, TagsView} from './business'
-	// import ResizeMixin from './mixin/ResizeHandler';
-	// import { mapActions, mapState } from 'vuex'
-
-
-	export default {
+	export default defineComponent({
 		name: 'Layout',
-		// components: {
-		// 	AppHeader,
-		// 	AppSider,
-		// 	AppInside,
-		// 	AppMain,
-		// 	Logo,
-		// 	Menu,
-		// 	TagsView,
-		// 	Navbar,
-		// 	Hamburger,
-		// },
-		// data() {
-		// 	return {
-
-		// 	}
-		// },
-		// mixins: [ResizeMixin],
-		// computed: {
-		// 	...mapState('settings',['headerStick','tagsView','hamburgerPosition']),
-		// },
-		// methods: {
-
-		// }
-	};
+	})
 </script>
 
 <style lang="scss" scoped>

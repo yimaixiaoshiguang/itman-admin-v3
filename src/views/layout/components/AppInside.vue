@@ -1,19 +1,14 @@
 <template>
-    <el-container class="mvk-layout-inside" :class="insideClass">
+    <el-container class="mvk-layout-inside" :class="insideClass" direction="vertical">
         <slot/>
     </el-container>
 </template>
 
-<script setup>
-
-
-
-</script>
 <script>
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
     name: 'AppInside',
     setup(props){
 		const store = useStore()
@@ -33,7 +28,7 @@ export default {
 			insideClass
 		}
 	}
-};
+});
 </script>
 
 <style lang="scss" scoped>

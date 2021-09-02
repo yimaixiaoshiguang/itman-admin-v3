@@ -3,28 +3,10 @@
         <slot></slot>
     </div>
 </template>
-
-<script setup>
-
-
-
-
-	// console.log(store.state.app.sidebar.opened);
-	// console.log(siderCollapse.value);
-
-	// const siderClass = computed(() => {
-	// 	return {
-	// 		'mvk-layout-sider-collapse':siderCollapse,
-	// 		'mvk-layout-sider-dark':siderTheme == 'dark',
-	// 		'mvk-layout-sider-fixed':siderFixed
-	// 	}
-	// })
-
-</script>
 <script>
 import { useStore } from 'vuex';
-import { computed } from 'vue'
-export default {
+import { computed, defineComponent } from 'vue'
+export default defineComponent({
     name: 'AppSider',
 	setup(props){
 		const store = useStore()
@@ -32,8 +14,6 @@ export default {
 		const siderFixed = computed(() => store.state.settings.siderFixed)
 		const siderTheme = computed(() => store.state.settings.siderTheme)
 		const siderCollapse = computed(() => !store.state.app.sidebar.opened)
-
-		console.log(siderCollapse.value);
 
 		const siderClass = computed(() => {
 			return {
@@ -47,7 +27,7 @@ export default {
 			siderClass
 		}
 	}
-};
+});
 </script>
 
 <style lang="scss">

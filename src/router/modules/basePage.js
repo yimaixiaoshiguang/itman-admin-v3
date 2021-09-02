@@ -44,7 +44,7 @@ const sysBaseRouter = {
 		    	title: '菜单管理',
 		    	// icon:'caidan',
 		    },
-			component: () => import('@/views/basePage/menuInfo.vue'),
+			component: () => import('@/views/basePage/menu/menuInfo.vue'),
 		},
 
 	]

@@ -24,6 +24,22 @@ export const constantRoutes = [
 			}
 		]
 	},
+	{
+		path: '/404',
+		component: () => import('views/layout/index.vue'),
+		hidden:true,
+		children: [
+			{
+				path: '/error404',
+				name: '404',
+				meta: {
+					title: '404',
+				},
+				component: () => import('views/error/404.vue'),
+				hidden:true
+			}
+		]
+	},
 	// {
 	// 	path: '/personal',
 	// 	component: () => import('views/layout/index'),
@@ -48,7 +64,7 @@ export const constantRoutes = [
 		meta: {
 			title: '系统设置',
 		},
-		component: () => import('views/layout/index'),
+		component: () => import('views/layout/index.vue'),
 		children: [
 			{
 				path: '/setting/index',
@@ -56,16 +72,16 @@ export const constantRoutes = [
 				meta: {
 					title: '设置',
 				},
-				component: () => import('views/setting/index'),
+				component: () => import('views/setting/index.vue'),
 			}
 		]
 	},
 
-
+	sysBaseRouter,
 ]
 
 
 export const asyncRoutes = [
-	sysBaseRouter,
+
 	// selfManagerRouter
 ]

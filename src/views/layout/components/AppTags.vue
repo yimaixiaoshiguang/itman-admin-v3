@@ -29,8 +29,6 @@
 </script>
 
 <script>
-	import { mapState } from 'vuex'
-
 	import { getCurrentInstance, onMounted, onActivated, onUnmounted } from 'vue'
 
 	function getScroll(target, top) {
@@ -45,47 +43,20 @@
 
 	export default {
 		name:'AppTags',
-		// data() {
-		// 	return {
-		// 		rectTop:0,//离顶部的距离
-		// 		styles:{}
-		// 	}
-		// },
-		// computed: {
-		// 	...mapState('settings',['tagsFixed','headerFixed']),
-
-		// 	affix(){
-		// 		return !this.headerFixed
-		// 	},
-
-		// 	collapse() {
-		// 		return !this.$store.state.app.sidebar.opened;
-		// 	},
-
-		// 	tagsClass(){
-		// 		return {
-		// 			'mvk-tags-view-fixed':this.tagsFixed,
-		// 			'mvk-tags-view-sider-collapse':this.tagsFixed && this.collapse
-		// 		}
-		// 	},
-		// },
-		// watch: {
-		// },
-
 		setup(props) {
 			const {ctx} = getCurrentInstance();
 
 			onMounted(() => {
 				rectTop = ctx.$el.getBoundingClientRect().top
 				window.addEventListener('scroll', handleScroll())
-			}),
+			})
 
 			onActivated(() => {
 				handleScroll()
-			}),
+			})
 			onUnmounted(() => {
 				window.removeEventListener('scroll', handleScroll())
-			}),
+			})
 
 			const handleScroll = () => {
 				if(tagsFixed.value && affix.value){
@@ -107,25 +78,6 @@
 				handleScroll
 			}
 		}
-
-
-		// methods: {
-		// 	handleScroll () {
-		// 		if(this.tagsFixed && this.affix){
-		// 			const scrollTop = getScroll(window, true);
-		// 			// Fixed Top
-		// 			if (scrollTop < this.rectTop) {
-		// 				this.styles = {
-		// 					top: (this.rectTop - scrollTop)+'px',
-		// 				};
-		// 			} else {
-		// 				this.styles = {
-		// 					top:0
-		// 				};
-		// 			}
-		// 		}
-        //     },
-		// }
 	}
 </script>
 

@@ -1,6 +1,6 @@
 export const defaultSettings = {
 
-	title: '美物纪新零售交易平台',
+	title: '美物纪新零售平台',
 
 	logo: import.meta.globEager('./assets/icon_Logo@2x.png'),
 

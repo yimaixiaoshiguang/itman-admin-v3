@@ -5,6 +5,8 @@ import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import App from './App.vue'
 
+import './permission'
+
 import '@/assets/scss/index.scss' // global css
 
 import '@/assets/iconfont/iconfont.js';

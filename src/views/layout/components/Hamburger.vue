@@ -11,8 +11,8 @@
 <script>
 
 import { useStore } from 'vuex';
-import { computed }  from 'vue'
-export default {
+import { computed, defineComponent }  from 'vue'
+export default defineComponent({
 	name: 'Hamburger',
 	props: {
 		isActive: {
@@ -42,7 +42,7 @@ export default {
 	// 		this.$store.dispatch('app/toggleSideBar');
 	// 	}
 	// }
-};
+});
 </script>
 
 <style lang="scss" scoped>

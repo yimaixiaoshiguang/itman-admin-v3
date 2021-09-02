@@ -80,7 +80,6 @@ const actions = {
 	}) {
 		return new Promise(resolve => {
 			// resetRouter();
-
 			commit('SET_ROUTES', asyncRoutes);
 			router.addRoute(asyncRoutes)
 			resolve(state.routes)
