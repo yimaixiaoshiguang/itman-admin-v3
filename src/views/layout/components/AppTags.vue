@@ -10,7 +10,7 @@
 <script setup>
 	import { ref, computed } from 'vue'
 	import { useStore } from 'vuex';
-	const rectTop = ref(0)
+	let rectTop = ref(0)
 	const styles = ref({})
 
 	const store = useStore()
@@ -62,9 +62,9 @@
 				if(tagsFixed.value && affix.value){
 					const scrollTop = getScroll(window, true);
 					// Fixed Top
-					if (scrollTop < this.rectTop) {
+					if (scrollTop < ctx.rectTop) {
 						styles.value = {
-							top: (this.rectTop - scrollTop)+'px',
+							top: (ctx.rectTop - scrollTop)+'px',
 						};
 					} else {
 						styles.value = {
