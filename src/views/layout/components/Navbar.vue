@@ -1,30 +1,36 @@
 <template>
 	<div class="navbar">
-		<hamburger v-if="hamburgerPosition == 'navbar'"/>
-		<breadcrumb class="breadcrumb-container" />
-		<div>
-			<logout />
-			<icon-svg icon="more"></icon-svg>
+		<div class="left">
+			<hamburger v-if="hamburgerPosition == 'navbar'" />
+			<breadcrumb class="breadcrumb-container" />
+		</div>
+		<div class="center"></div>
+		<div class="right">
+			<div>
+				<logout />
+				<icon-svg icon="more"></icon-svg>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-	import { useStore } from 'vuex';
-	import { computed, defineComponent }  from 'vue'
-	import Breadcrumb from './Breadcrumb.vue';
-	import Hamburger from './Hamburger.vue';
-	import logout from '../business/Logout.vue';
+import { useStore } from "vuex"
+import { computed, defineComponent } from "vue"
+import Breadcrumb from "./Breadcrumb.vue"
+import Hamburger from "./Hamburger.vue"
+import logout from "../business/Logout.vue"
 
-	const store = useStore()
-	const sidebar = computed(() => store.state.app.sidebar)
+const store = useStore()
+const sidebar = computed(() => store.state.app.sidebar)
 
-	const hamburgerPosition = computed(() => store.state.settings.hamburgerPosition)
+const hamburgerPosition = computed(() => store.state.settings.hamburgerPosition)
+const itmanLayout = computed(() => store.state.settings.layout)
 </script>
 <script>
-	export default defineComponent({
-		name:'Navbar'
-	})
+export default defineComponent({
+	name: "Navbar"
+})
 
 // export default {
 // 	components: {
@@ -48,13 +54,20 @@
 .navbar {
 	display: flex;
 	flex: 1;
+	justify-content: space-between;
+
+	.left,
+	.center,
+	.right {
+		display: flex;
+		align-items: center;
+	}
 
 	.breadcrumb-container {
 		flex: 1;
 		display: flex;
 		align-items: center;
 	}
-
 
 	&.navbar-imgbg {
 		background: #000;

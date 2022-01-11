@@ -1,5 +1,5 @@
 .mvk-tags-view {
-    width: calc(100vw - #{$siderWidth});
+    // width: calc(100vw - #{$siderWidth});
     background-color: $mainbg;
     transition: all .2s ease-in-out;
     z-index: 2;
@@ -14,8 +14,7 @@
         padding: $contentPadding;
     }
 
-    +.mvk-layout-content-main {
-        padding-top: 0;
+    +.itman-layout-content-main {
         transition: all .2s ease-in-out;
     }
 
@@ -24,7 +23,7 @@
         width: calc(100vw - #{$siderWidth});
         left: $siderWidth;
 
-        +.mvk-layout-content-main {
+        +.itman-layout-content-main {
             padding-top: 60px;
         }
     }

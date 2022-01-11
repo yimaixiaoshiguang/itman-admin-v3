@@ -1,10 +1,10 @@
-.mvk-layout-sider {
+.itman-layout-sider {
     display: flex;
     flex-direction: column;
     width: $siderWidth;
-    min-height: 100vh;
-    flex: 0 0 $siderWidth;
-    z-index: 10;
+    // min-height: 100vh;
+    // flex: 0 0 $siderWidth;
+    // z-index: 10;
     background-color: $sideLightColor;
     box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
     transition: all .2s ease-in-out;
@@ -16,23 +16,18 @@
         top: 0;
         bottom: 0;
 
-        // +.mvk-layout-inside {
+        // +.itman-layout-inside {
         //     padding-left: $siderWidth;
         // }
     }
 
     .mvk-hamburger-container {
-        width: $siderWidth !important;
         transition: all .2s ease-in-out;
     }
 
     &-collapse {
         width: $sideWidthCollapse;
-        flex: 0 0 $sideWidthCollapse;
-
-        .mvk-hamburger-container {
-            width: $sideWidthCollapse !important;
-        }
+        // flex: 0 0 $sideWidthCollapse;
     }
 
     &-dark {
@@ -45,7 +40,7 @@
 }
 
 /**和element ui 有关的样式修改 */
-.mvk-layout-sider{
+.itman-layout-sider{
     .el-menu {
         border-right: none;
     }

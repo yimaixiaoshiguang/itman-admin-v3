@@ -6,6 +6,10 @@
     border-radius: 8px;
 }
 
+.el-menu--horizontal .el-menu-item, .el-submenu__title {
+    border-radius: 0;
+}
+
 .el-submenu .el-menu-item {
     height: 40px;
     line-height: 40px;

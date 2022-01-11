@@ -1,48 +1,32 @@
 <template>
-	<el-container class="mvk-layout">
-		<app-sider>
-			<logo />
-			<Menu style="flex:1"/>
-			<div>
-				<hamburger v-if="hamburgerPosition == 'sidebar'"/>
-			</div>
-		</app-sider>
+	<!--默认布局（左侧垂直菜单）-->
+	<default-layout v-if="itmanLayout == 'default'"></default-layout>
 
-		<app-inside>
-			<app-header>
-				<logo v-if="headerStick"/>
-				<navbar />
-			</app-header>
-			<div class="mvk-layout-content">
-				<tag-view v-if="tagsView"></tag-view>
-				<div class="mvk-layout-content-main">
-					<app-main />
-				</div>
-			</div>
-			<el-footer height="" class="mvk-footer">
-				Copyright © 2021 广东美物纪数字技术有限公司
-			</el-footer>
-		</app-inside>
-	</el-container>
+	<!--三栏布局（左侧一级，二级菜单并列）-->
+	<three-column-layout v-else-if="itmanLayout == 'threeColumn'"></three-column-layout>
 
+	<!--通栏布局(头部一级菜单，左侧二级菜单)-->
+	<header-menu-layout v-else-if="itmanLayout == 'header'"> </header-menu-layout>
+
+	<!--功能坞（头部水平菜单）-->
+	<dock-menu-layout v-else></dock-menu-layout>
 </template>
 <script setup>
-	import {AppHeader, AppSider, AppInside, Logo, AppMain, Navbar, Hamburger, AppTags } from './components';
-	import {Menu, TagView} from './business'
-	import { computed, defineComponent } from 'vue'
-	import { useStore } from 'vuex'
+import { computed, defineComponent } from "vue"
+import { useStore } from "vuex"
 
-	const store = useStore()
-	const headerStick = computed(() => store.state.settings.headerStick)
-	const tagsView = computed(() => store.state.settings.tagsView)
-	const hamburgerPosition = computed(() => store.state.settings.hamburgerPosition)
+import defaultLayout from "./layout/default.vue"
+import threeColumnLayout from "./layout/threeColumn.vue"
+import headerMenuLayout from "./layout/headerMenu.vue"
+import dockMenuLayout from "./layout/dockMenu.vue"
 
+const store = useStore()
+const itmanLayout = computed(() => store.state.settings.layout)
 </script>
 <script>
-	export default defineComponent({
-		name: 'Layout',
-	})
+export default defineComponent({
+	name: "Layout"
+})
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

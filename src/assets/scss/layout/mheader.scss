@@ -1,5 +1,5 @@
-.mvk-layout-header {
-    width: calc(100vw - #{$siderWidth});
+.itman-layout-header {
+    // width: calc(100vw - #{$siderWidth});
     height: $headerHeight;
     color: $sideLightTextColor;
     background: $headerLight;
@@ -7,7 +7,7 @@
     display: flex;
     box-shadow: 2px 1px 4px rgb(0 21 41 / 8%);
     transition: all .2s ease-in-out;
-    
+
     &-dark {
         background-color: $headerDark;
         color: $sideDarkTextColor;
@@ -20,12 +20,12 @@
 
     &-fixed {
         position: fixed;
-        width: calc(100vw - #{$siderWidth});
-        left: $siderWidth;
+        // width: calc(100vw - #{$siderWidth});
+        // left: $siderWidth;
         top: 0;
         z-index: 1001;
 
-        +.mvk-layout-content {
+        +.itman-layout-content {
             padding-top: $headerHeight;
         }
     }
@@ -39,5 +39,65 @@
         left: 0;
         z-index: 13;
         width: 100vw;
+		position: fixed;
+
+		& + .itman-wrapper {
+			margin-top: $headerHeight;;
+		}
     }
+}
+
+.header-menu {
+	display: flex;
+	height: 100%;
+	margin-left: 40px;
+
+	li {
+		padding: 0 10px;
+		margin: 0 10px 0 0;
+		font-size: 14px;
+		list-style: none;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+
+		&.active {
+			color: #fff;
+			background-image: $sideDarkBgActivColor;
+		}
+	}
+}
+
+.itman-layout-header-dark {
+	.el-menu {
+		background-color: $headerDark;
+        color: $sideDarkTextColor;
+	}
+
+	.is-active {
+		border-bottom:none !important;
+		background-image: $sideDarkBgActivColor;
+
+		[slot="title"],.svg-icon {
+			color: #fff;
+		}
+
+		.el-submenu__title {
+			color: #fff;
+			border-bottom:none !important;
+			&:hover {
+				background: rgba(255, 255, 255, 0.1);
+			}
+		}
+
+	}
+
+	.el-breadcrumb__inner,.el-dropdown {
+		color:$sideDarkTextColor !important
+	}
 }

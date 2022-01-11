@@ -1,29 +1,27 @@
 <template>
-    <div class="mvk-layout-header" :class="headerClass">
-        <slot></slot>
-    </div>
+	<div class="itman-layout-header" :class="headerClass">
+		<slot name="left"></slot>
+		<slot name="right" class="layout-header-right"></slot>
+		<slot></slot>
+	</div>
 </template>
 <script>
-import { useStore } from 'vuex'
-import { computed, defineComponent }  from 'vue'
+import { useStore } from "vuex"
+import { computed, defineComponent } from "vue"
 
 export default defineComponent({
-    name: 'AppHeader',
-	setup(props){
+	name: "AppHeader",
+	setup(props) {
 		const store = useStore()
 
 		const headerTheme = computed(() => store.state.settings.headerTheme)
-		const headerFixed = computed(() => store.state.settings.headerFixed)
 		const headerStick = computed(() => store.state.settings.headerStick)
-		const siderCollapse = computed(() => !store.state.app.sidebar.opened)
 
 		const headerClass = computed(() => {
 			return {
-				'mvk-layout-header-dark':headerTheme.value == 'dark',
-				'mvk-layout-header-primary':headerTheme.value == 'primary',
-				'mvk-layout-header-fixed':headerFixed.value,
-				'mvk-layout-header-sider-collapse':siderCollapse.value,
-				'mvk-layout-header-stick':headerFixed.value && headerStick.value,
+				"itman-layout-header-dark": headerTheme.value == "dark",
+				"itman-layout-header-primary": headerTheme.value == "primary",
+				"itman-layout-header-stick": headerStick.value
 			}
 		})
 
@@ -31,9 +29,17 @@ export default defineComponent({
 			headerClass
 		}
 	}
-});
+})
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+.itman-layout-header {
+	display: flex;
+	justify-content: space-between;
+	.layout-header-left,
+	.layout-header-right {
+		display: flex;
+		align-items: center;
+	}
+}
 </style>

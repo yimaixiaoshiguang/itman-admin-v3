@@ -14,47 +14,23 @@
 </template>
 
 <script setup>
-	import { useStore } from 'vuex';
-	import { computed, defineComponent, toRaw } from 'vue'
+import { useStore } from "vuex"
+import { computed, defineComponent, toRaw } from "vue"
 
-	const store = useStore()
-	const collapse = computed(() => !store.state.app.sidebar.opened)
-	const title = computed(() => store.state.settings.title)
-	// const logo = computed(() => store.state.settings.logo)
-	const logo = toRaw(store.state.settings.logo)
-	let logosrc = ''
-	for(var path in logo){
-		logosrc = logo[path].default
-	}
-	console.log(logosrc);
-
+const store = useStore()
+const collapse = computed(() => !store.state.app.sidebar.opened)
+const title = computed(() => store.state.settings.title)
+// const logo = computed(() => store.state.settings.logo)
+const logo = toRaw(store.state.settings.logo)
+let logosrc = ""
+for (var path in logo) {
+	logosrc = logo[path].default
+}
 </script>
 <script>
-	export default defineComponent({
-		name: 'SiderLogo',
-		// data() {
-		// 	return {
-		// 	};
-		// },
-		// computed: {
-		// 	collapse() {
-		// 		return !this.$store.state.app.sidebar.opened;
-		// 	},
-
-		// 	title() {
-		// 		return this.$store.state.settings.title
-		// 	},
-		// 	logo() {
-		// 		return this.$store.state.settings.logo
-		// 	}
-		// },
-	});
+export default defineComponent({
+	name: "SiderLogo"
+})
 </script>
 
-<style lang="scss" scoped>
-
-
-	// /deep/ .router-link-active {
-	//     background-color: transparent;
-	// }
-</style>
+<style lang="scss" scoped></style>

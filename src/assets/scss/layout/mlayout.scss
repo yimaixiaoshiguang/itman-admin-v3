@@ -1,11 +1,37 @@
+@import './variables.scss';
 @import './mheader.scss';
 @import './msider.scss';
 @import './minside.scss';
 @import './mlogo.scss';
 @import './mtags.scss';
+@import './threeColumn.scss';
+
+.itman {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+
+.itman-body {
+	flex: 1;
+    display: flex;
+    flex-flow: column;
+	overflow: auto;
+}
+
+.itman-wrapper {
+	display: flex;
+    flex: 1;
+    overflow: auto;
+}
+
+
+
 
 .mvk-hamburger-container {
-    width: $headerHeight;
+	min-width: $headerHeight;
     height: $headerHeight;
     display: flex;
     justify-content: center;
@@ -17,25 +43,27 @@
     }
 }
 
-.mvk-layout-content {
+.itman-layout-content {
     display: flex;
     flex-direction: column;
     flex: 1;
+	overflow: auto;
 }
 
-.mvk-layout-content-main {
+.itman-layout-content-main {
     flex: 1;
     padding: $contentPadding;
+	overflow: auto;
 }
 
-.mvk-layout-content-card {
+.itman-layout-content-card {
     padding: 15px;
     border-radius: 4px;
     background-color: #FFFFFF;
     box-shadow: 0 0 10px 0 rgb(158 164 194 / 20%);
 }
 
-.mvk-footer {
+.itman-footer {
     text-align: center;
     font-size: 14px;
     color: #808695;

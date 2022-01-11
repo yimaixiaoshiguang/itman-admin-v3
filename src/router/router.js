@@ -9,16 +9,20 @@ export const constantRoutes = [
 	},
 	{
 		path: '/dashboard',
-		redirect:'/dashboard/index',
+		redirect: '/dashboard/index',
 		component: () => import('views/layout/index.vue'),
+		meta: {
+			title: '首页',
+			icon: 'shouye'
+		},
 		children: [
 			{
 				path: '/dashboard/index',
 				name: 'dashboardIndex',
 				meta: {
 					title: '首页',
-					icon:'shouye',
-					affix:true
+					icon: 'shouye',
+					affix: true
 				},
 				component: () => import('views/dashboard/index.vue'),
 			}
@@ -27,7 +31,7 @@ export const constantRoutes = [
 	{
 		path: '/404',
 		component: () => import('views/layout/index.vue'),
-		hidden:true,
+		hidden: true,
 		children: [
 			{
 				path: '/error404',
@@ -36,7 +40,7 @@ export const constantRoutes = [
 					title: '404',
 				},
 				component: () => import('views/error/404.vue'),
-				hidden:true
+				hidden: true
 			}
 		]
 	},
@@ -63,8 +67,9 @@ export const constantRoutes = [
 		name: 'setting',
 		meta: {
 			title: '系统设置',
-			icon:'yonghu'
+			icon: 'yonghu'
 		},
+		redirect: '/setting/index',
 		component: () => import('views/layout/index.vue'),
 		children: [
 			{

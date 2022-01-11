@@ -1,26 +1,26 @@
 <template>
-    <el-container class="mvk-layout-inside" :class="insideClass" direction="vertical">
-        <slot/>
-    </el-container>
+	<el-container class="itman-layout-inside" :class="insideClass" direction="vertical">
+		<slot />
+	</el-container>
 </template>
 
 <script>
-import { useStore } from 'vuex'
-import { computed, defineComponent } from 'vue'
+import { useStore } from "vuex"
+import { computed, defineComponent } from "vue"
 
 export default defineComponent({
-    name: 'AppInside',
-    setup(props){
+	name: "AppInside",
+	setup(props) {
 		const store = useStore()
 
 		const siderFixed = computed(() => store.state.settings.siderFixed)
 
 		const siderCollapse = computed(() => !store.state.app.sidebar.opened)
 
-		const insideClass = computed(()=>{
+		const insideClass = computed(() => {
 			return {
-				'mvk-layout-inside-sider-fixed':siderFixed.value,
-				'mvk-layout-inside-sider-fixed-collapse':siderFixed.value && siderCollapse.value
+				"itman-layout-inside-sider-fixed": siderFixed.value,
+				"itman-layout-inside-sider-fixed-collapse": siderFixed.value && siderCollapse.value
 			}
 		})
 
@@ -28,9 +28,7 @@ export default defineComponent({
 			insideClass
 		}
 	}
-});
+})
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

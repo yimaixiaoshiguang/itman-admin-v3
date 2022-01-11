@@ -1,14 +1,14 @@
 <template>
-    <div class="mvk-layout-sider" :class="siderClass">
-        <slot></slot>
-    </div>
+	<div class="itman-layout-sider" :class="siderClass">
+		<slot></slot>
+	</div>
 </template>
 <script>
-import { useStore } from 'vuex';
-import { computed, defineComponent } from 'vue'
+import { useStore } from "vuex"
+import { computed, defineComponent } from "vue"
 export default defineComponent({
-    name: 'AppSider',
-	setup(props){
+	name: "AppSider",
+	setup(props) {
 		const store = useStore()
 
 		const siderFixed = computed(() => store.state.settings.siderFixed)
@@ -17,9 +17,9 @@ export default defineComponent({
 
 		const siderClass = computed(() => {
 			return {
-				'mvk-layout-sider-collapse':siderCollapse.value,
-				'mvk-layout-sider-dark':siderTheme.value == 'dark',
-				'mvk-layout-sider-fixed':siderFixed.value
+				"itman-layout-sider-collapse": siderCollapse.value,
+				"itman-layout-sider-dark": siderTheme.value == "dark",
+				"itman-layout-sider-fixed": siderFixed.value
 			}
 		})
 
@@ -27,12 +27,7 @@ export default defineComponent({
 			siderClass
 		}
 	}
-});
+})
 </script>
 
-<style lang="scss">
-
-
-
-
-</style>
+<style lang="scss"></style>
