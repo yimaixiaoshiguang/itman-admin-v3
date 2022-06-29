@@ -7,15 +7,15 @@ let refresh = false;
 let toRouter = null
 
 router.beforeEach(async (to, from, next) => {
-	// console.log(to);
-	// console.log(from);
+	console.log(to);
+	console.log(from);
 	toRouter = to
 	// next()
 	// 判断是否已登陆
-	if(getToken()){
+	if (getToken()) {
 
 		//页面刷新的情况，需要重新获取菜单
-		if(from.name == null && !refresh){
+		if (from.name == null && !refresh) {
 			refresh = true;
 
 			// store.dispatch('user/getUserMenuTree')
@@ -44,7 +44,7 @@ router.beforeEach(async (to, from, next) => {
 			// 	next({...to})
 			// }
 
-			next({...to})
+			next({ ...to })
 
 
 		} else {
@@ -60,8 +60,8 @@ router.beforeEach(async (to, from, next) => {
 		// 	next()
 		// }
 
-	}else{
-		if(to.path == '/'){
+	} else {
+		if (to.path == '/') {
 			removeAllSessionItem()
 			next()
 		} else {
