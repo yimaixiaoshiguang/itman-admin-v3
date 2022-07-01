@@ -1,0 +1,45 @@
+{
+	"git.path": "D:\\Program Files\\Git\\cmd\\git.exe",
+	"emmet.triggerExpansionOnTab": true,
+	"vetur.format.options.tabSize": 4,
+	"vetur.format.options.useTabs": true,
+	"vetur.format.defaultFormatter.js": "vscode-typescript",
+	// "vetur.format.defaultFormatter.js": "prettier",
+	"vetur.format.defaultFormatterOptions": {
+		"prettier": {
+			"singleQuote": false,
+			"semi": false,
+			// "trailingComma": "none",
+		}
+	},
+	"javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+	// "files.autoSave": "onFocusChange",
+	"editor.formatOnType": true,
+	"editor.formatOnSave": true,
+	"files.defaultLanguage": "vue",
+	"workbench.tree.indent": 20,
+	"editor.quickSuggestions": {
+		"strings": true
+	},
+	"editor.wrappingIndent": "deepIndent",
+	"html.format.indentHandlebars": true,
+	"vue3snippets.useTabs": true,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"vue3snippets.semi": false,
+	"editor.tabCompletion": "on",
+	"vue3snippets.trailingComma": "none",
+	"vue3snippets.tabWidth": 4,
+	"volar.formatting.printWidth": 120,
+	"vue3snippets.printWidth": 120,
+	"[vue]": {
+		"editor.defaultFormatter": "Wscats.vue"
+	},
+	"workbench.colorTheme": "WeChat Dark",
+	"less.compile": {
+		"outExt": ".wxss"
+	},
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"vetur.validation.interpolation": false,
+	"vetur.validation.template": false,
+	"explorer.confirmDelete": false
+}

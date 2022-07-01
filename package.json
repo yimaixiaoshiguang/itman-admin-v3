@@ -1,10 +1,12 @@
 {
-	"name": "eshop-vue3",
-	"version": "0.0.0",
+	"name": "itman-admin-vue3",
+	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"serve": "vite preview"
+		"serve": "vite preview",
+		"lint": "eslint src/**/*.{js,vue} --fix",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"axios": "^0.21.0",
@@ -21,6 +23,11 @@
 		"@vue/compiler-sfc": "^3.0.5",
 		"vite": "^2.4.4",
 		"sass": "^1.26.5",
-		"sass-loader": "^8.0.2"
+		"sass-loader": "^8.0.2",
+		"eslint": "^7.32.0",
+		"eslint-plugin-vue": "^7.18.0",
+		"husky": "^7.0.2",
+		"lint-staged": "^11.1.2",
+		"prettier": "^2.4.1"
 	}
 }
